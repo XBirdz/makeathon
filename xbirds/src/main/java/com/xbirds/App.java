@@ -37,7 +37,7 @@ public class App extends Application
         // Optional: Set minimum and maximum sizes to prevent excessive resizing
         window.setMinHeight(400);
         window.setMinWidth(600);
-      
+        window.initStyle(StageStyle.UNDECORATED);
         window.setScene(scene);
         window.show();
       }
