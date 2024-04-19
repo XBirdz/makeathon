@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TravelmythAPI {
 
@@ -35,8 +37,22 @@ public class TravelmythAPI {
             System.out.println(e.getMessage());
             return "Error";
         }
+        
     }
+    public static void jsonextract(String jsonString){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            String name = jsonNode.get("name").asText();
+            String destUrl = jsonNode.get("url").asText();
+            String latitude = jsonNode.get("latitude").asText();
+            String longitude = jsonNode.get("longitude").asText();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     public static void main(String [] args ){
         System.out.println(apireq("Athens","ski"));
     }
 }
+
