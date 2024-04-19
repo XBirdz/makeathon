@@ -30,6 +30,45 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+            <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21.0.1</version>
+        </dependency>
+
+        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>21.0.1</version>
+        </dependency>
+
+    
+       <dependency> 
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency> 
+        
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx-all</artifactId>
+            <version>11.24.0</version>
+        </dependency>
+   
+        <dependency>
+            <groupId>org.glavo.materialfx</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.13.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.2.0</version>
+        </dependency>
+
   </dependencies>
 
   <build>
@@ -88,6 +127,15 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.8</version>
+            <configuration>
+                <mainClass>gr.aueb.dmst.onepercent.programming.graphics.RunMain</mainClass>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
