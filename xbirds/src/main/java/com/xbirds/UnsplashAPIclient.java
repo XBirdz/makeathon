@@ -13,7 +13,7 @@ import java.io.BufferedReader;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class UnsplashAPIclient {
-    public static void fetchPhotos(String keyword) {
+    public static String fetchPhotos(String keyword) {
        
         String baseUrl = "https://api.unsplash.com/photos/random";
 
@@ -21,12 +21,13 @@ public class UnsplashAPIclient {
         String accessKey = "l07591426f_Fyl8RBgsHA4Muod0WtnrdQY7l6_akooo";
 
     
-        String query = "travel " + keyword; 
+        String query = "travel-" + keyword; 
         String orientation = "landscape"; 
         int count = 1; 
 
       
-        String urlString = String.format(baseUrl+"?client_id="+accessKey/*+"&query="+query+"&orientation="+orientation+"&count="+count*/);
+        String urlString = "https://api.unsplash.com/photos/random?client_id="+accessKey+"&orientation=landscape&query="+query;
+        System.err.println(urlString);
 
         try {
         
@@ -51,18 +52,41 @@ public class UnsplashAPIclient {
                     response.append(line);
                 }
                 reader.close();
-
+                return response.toString();
             
-                System.out.println(response.toString());
             } else {
                 System.out.println("Failed to retrieve photos. Status code: " + responseCode);
             }
 
             
             connection.disconnect();
+            return "Error";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error";
+        }
+    }
+    public static BufferedImage downloadPhoto(URL url) {
+        try {
+        
+            BufferedImage image = ImageIO.read(url);
+
+            
+          return image;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+}
+public static String jsonextract(String jsonString){
+    try {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(jsonString);
+        String name = jsonNode.get("urls").get("regular").asText();
+        return name;
+} catch (Exception e) {
+    e.printStackTrace();
+    return null;
+}
+}
 }
