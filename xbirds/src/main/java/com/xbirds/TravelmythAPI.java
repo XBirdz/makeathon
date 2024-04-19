@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 
 public class TravelmythAPI {
 
-        public String apireq(String destination, String type){
+        public static String apireq(String destination, String type){
             try{
             String apiKey = "myTeam";
             String urlString = "https://www.travelmyth.gr/api_chat_makeathon.php?destination=" + destination + "&lang=en&categories=" + type + "&apiKey=" + apiKey;
@@ -35,5 +35,8 @@ public class TravelmythAPI {
             System.out.println(e.getMessage());
             return "Error";
         }
+    }
+    public static void main(String [] args ){
+        System.out.println(apireq("Athens","ski"));
     }
 }
