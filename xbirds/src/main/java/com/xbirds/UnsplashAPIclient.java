@@ -76,6 +76,7 @@ public class UnsplashAPIclient {
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
 }
 public static String jsonextract(String jsonString){
