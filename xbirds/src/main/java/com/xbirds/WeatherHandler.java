@@ -2,12 +2,14 @@ package com.xbirds;
 import java.util.List;
 public class WeatherHandler {
     private static List<String> cities;
+    private static List<CityInfo> info;
     private static String[] weathers;
     private static String type;
     public static void init(String input){
         cities = GptConnector.handleUserInp(input);
         for (String city : cities) {
             TravelmythAPI.createInfo(city, type);
+            info = TravelmythAPI.getInfo();
         }
     }
     
