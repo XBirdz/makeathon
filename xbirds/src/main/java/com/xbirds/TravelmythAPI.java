@@ -27,7 +27,7 @@ public class TravelmythAPI {
             String types = sb.toString();
             String apiKey = "myTeam";
             String urlString = "https://www.travelmyth.gr/api_chat_makeathon_multi.php?destination="+destination+"&lang=en&categories="+types+"&apiKey=myTeam";
-            System.out.println(urlString);
+        
             URL url = new URL(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
