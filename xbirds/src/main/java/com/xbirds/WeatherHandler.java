@@ -19,6 +19,7 @@ public class WeatherHandler {
 
         }
         for (CityInfo cityInfo : info) {
+            System.out.println(cityInfo.getName());
             weather.weatherdata(weather.requestWeather(Double.parseDouble(cityInfo.getLatitude()), Double.parseDouble(cityInfo.getLongitude()), " "));
         } 
         
