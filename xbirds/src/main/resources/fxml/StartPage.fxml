@@ -82,4 +82,39 @@
          </children>
       </VBox>
    </left>
+   <right>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/starter-page/snowboard.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/starter-page/cycling.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="120.0" top="-70.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="150.0" layoutX="130.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/starter-page/surfing.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="-50.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="150.0" layoutX="10.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/starter-page/flamingo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="120.0" top="-75.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </right>
 </BorderPane>
