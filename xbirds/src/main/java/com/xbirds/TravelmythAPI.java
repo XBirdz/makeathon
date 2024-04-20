@@ -6,8 +6,12 @@ import java.net.URL;
 import java.io.BufferedReader;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.*;;
+
 
 public class TravelmythAPI {
+        private static List<CityInfo> cities;
+
 
         public static String apireq(String destination, String type){
             try{
@@ -39,7 +43,7 @@ public class TravelmythAPI {
         }
         
     }
-    public static void jsonextract(String jsonString){
+    public static CityInfo jsonextract(String jsonString) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(jsonString);
@@ -47,12 +51,14 @@ public class TravelmythAPI {
             String destUrl = jsonNode.get("url").asText();
             String latitude = jsonNode.get("latitude").asText();
             String longitude = jsonNode.get("longitude").asText();
-    } catch (Exception e) {
-        e.printStackTrace();
+            
+            // Create and return a CityInfo object
+            return new CityInfo(name, destUrl, Double.parseDouble(latitude), Double.parseDouble(longitude));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
-    public static void main(String [] args ){
-        System.out.println(apireq("Athens","ski"));
-    }
-}
+
 
