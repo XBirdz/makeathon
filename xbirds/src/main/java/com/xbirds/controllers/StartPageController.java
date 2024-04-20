@@ -115,6 +115,7 @@ public class StartPageController {
             minPriceListener();
             maxPriceListener();
 
+
         }
 
         private void showAlert(String title, String message) {
