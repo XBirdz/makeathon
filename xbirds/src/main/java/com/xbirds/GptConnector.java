@@ -26,7 +26,7 @@ public class GptConnector {
         "with only the destination names. Nothing else. Approximately 10 destinations.This is the user desires: Hi i want a romantic beach destintion for a city break. I live in athens.\"}" +
         "],";
         RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"You will provide travel destinations based on the requirements and desires of the user. You will provide a list " +
-        "with only the destination names. Nothing else. Approximately 10 destinations.This is the user desires: Hi i want a romantic beach destintion for a city break. I live in athens.\"}], \"temperature\": 0.7}");
+        "with only the destination names. Nothing else. Approximately 10 destinations.This is the user desires: "+userPrompt+".\"}], \"temperature\": 0.7}");
         //RequestBody body = RequestBody.create(mediaType, bodyString);
 
         Request request = new Request.Builder()
