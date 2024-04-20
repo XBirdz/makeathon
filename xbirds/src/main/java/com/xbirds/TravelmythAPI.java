@@ -15,8 +15,8 @@ public class TravelmythAPI {
             return citiesInfo;
         }
 
-        public static void createInfo(String destination, String type){
-            citiesInfo.add(jsonextract(apireq(destination, type)));
+        public static CityInfo createInfo(String destination, String type){
+            return jsonextract(apireq(destination, type));
         }
         public static String apireq(String destination, String type){
             try{
@@ -57,7 +57,7 @@ public class TravelmythAPI {
             String destUrl = jsonNode.get("url").asText();
             String latitude = jsonNode.get("latitude").asText();
             String longitude = jsonNode.get("longitude").asText();
-            
+            List<CityInfo> citiesInfo = new ArrayList<>();
             // Create and return a CityInfo object
             return new CityInfo(name, destUrl, latitude, longitude);
         } catch (Exception e) {
