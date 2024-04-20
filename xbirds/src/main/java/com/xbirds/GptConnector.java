@@ -42,25 +42,30 @@ public class GptConnector {
             return null;
         }
     }
-    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity, String weather){
+    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity, String weather) {
         OkHttpClient client = new OkHttpClient();
-
+    
         MediaType mediaType = MediaType.parse("application/json");
-        StringBuilder sb =  new StringBuilder();
-        for (int i = 0;i<ci.size();i++) {
-            sb. append("City info: "+ci.get(i).toString()+" Weather info: "+wi.toString());
+        StringBuilder sb = new StringBuilder();
+    
+        // Iterate over each CityInfo object and append city and weather info
+        for (int i = 0; i < ci.size(); i++) {
+            sb.append("City info: ").append(ci.get(i)).append(" Weather info: ").append(wi.get(i)).append("\n");
         }
-        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-4-turbo-2024-04-09\", \"messages\": [{\"role\": \"user\", \"content\": \"From the following destinations select 3"+
-        "You will be provided the city info and weather info. Based on the desired activity and weather select the top 3 cities."+sb.toString()+"activity:"+activity+"desired weather"+weather+"Provide only the destinations in a list. Nothing else. Only the name just lik it was given to you."+".\"}], \"temperature\": 0.7}");
-        
-
+    
+        // Construct the JSON request body
+        String requestBody = String.format("{\"model\": \"gpt-4-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"From the following destinations select 3. "
+                + "You will be provided the city info and weather info. Based on the desired activity and weather, select the top 3 cities.\n%s\nActivity: %s\nDesired weather: %s\nProvide only the destinations in a list. Nothing else. Only the name just like it was given to you.\"}], \"temperature\": 0.7}", sb.toString(), activity, weather);
+    
+        RequestBody body = RequestBody.create(mediaType, requestBody);
+    
         Request request = new Request.Builder()
-          .url("https://api.openai.com/v1/chat/completions")
-          .post(body)
-          .addHeader("Content-Type", "application/json")
-          .addHeader("Authorization", "Bearer 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")
-          .build();
-
+                .url("https://api.openai.com/v1/chat/completions")
+                .post(body)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer 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")
+                .build();
+    
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
@@ -78,8 +83,9 @@ public class GptConnector {
         List<String> destinations = new ArrayList<>();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
+            System.out.println(jsonString);
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-
+            
             JsonNode choicesNode = jsonNode.get("choices");
             if (choicesNode != null && choicesNode.isArray() && choicesNode.size() > 0) {
                 JsonNode messageNode = choicesNode.get(0).get("message");
