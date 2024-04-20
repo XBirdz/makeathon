@@ -283,25 +283,23 @@ public class weather {
                 sumMaxTemp += maxTempOfDay;
                 sumMinTemp += minTempOfDay;
     
-                // Update weather code summary
+               
                 weatherCodeSummary.put(weatherCode, weatherCodeSummary.getOrDefault(weatherCode, 0) + 1);
     
             }
     
-            // Calculate average temperatures
+            
             double avgMaxTemp = sumMaxTemp / maxTemperatures.size();
             double avgMinTemp = sumMinTemp / minTemperatures.size();
+            
     
             System.out.println("Total Max Temperature: " + totalMaxTemp + "°C");
             System.out.println("Total Min Temperature: " + totalMinTemp + "°C");
             System.out.println("Average Max Temperature: " + avgMaxTemp + "°C");
             System.out.println("Average Min Temperature: " + avgMinTemp + "°C");
     
-            // Print weather code summary
-            System.out.println("Weather Code Summary:");
-            for (Map.Entry<Integer, Integer> entry : weatherCodeSummary.entrySet()) {
-                System.out.println("Weather Code " + entry.getKey() + ": " + entry.getValue() + " occurrences");
-            }
+            WeatherInfo wi = new WeatherInfo(avgMaxTemp , avgMinTemp, totalMaxTemp, totalMinTemp, WeatherClassification.classify(weatherCodeSummary));
+            
     
         } catch (IOException e) {
             e.printStackTrace();
