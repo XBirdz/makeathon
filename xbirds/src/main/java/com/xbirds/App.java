@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 
 public class App extends Application
 {
-    Stage window;
+    public static Stage window;
     public static void main( String[] args )
     {
         
