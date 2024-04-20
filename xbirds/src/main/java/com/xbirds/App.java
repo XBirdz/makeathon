@@ -16,13 +16,13 @@ public class App extends Application
     public static void main( String[] args )
     {
         
-       Tasos_tests.test();
+        //Tasos_tests.test();
         launch(args);
         
     }
 
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/IntroPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartPage.fxml"));
         Parent root = loader.load();
         window = primaryStage;
         window.setTitle("SunSeeker");
