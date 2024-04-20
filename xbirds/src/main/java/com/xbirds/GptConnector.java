@@ -16,7 +16,7 @@ public class GptConnector {
 
         MediaType mediaType = MediaType.parse("application/json");
         String bodyString = "{" +
-        "\"model\": \"gpt-3.5-turbo-0125\", " +
+        "\"model\": \"gpt-4-turbo-2024-04-09\", " +
         "\"temperature\": 0, " +
         "\"top_p\": 1, " +
         "\"max_tokens\": 15000, " +
