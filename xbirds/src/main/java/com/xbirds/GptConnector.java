@@ -11,8 +11,8 @@ public class GptConnector {
     public static List<String> handleUserInp(String userPrompt){
         return jsonExtract(gtpRequest(userPrompt));
     }
-    public static List<String> selection(List<CityInfo> ci, List<WeatherInfo> wi, String a){
-        return jsonExtract(city_select(ci,wi, a));
+    public static List<String> selection(List<CityInfo> ci, List<WeatherInfo> wi, String a, String w){
+        return jsonExtract(city_select(ci,wi, a, w));
     }
     public static String gtpRequest(String userPrompt){
         OkHttpClient client = new OkHttpClient();
@@ -42,7 +42,7 @@ public class GptConnector {
             return null;
         }
     }
-    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity){
+    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity, String weather){
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -51,7 +51,7 @@ public class GptConnector {
             sb. append("City info: "+ci.get(i).toString()+" Weather info: "+wi.toString());
         }
         RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-4-turbo-2024-04-09\", \"messages\": [{\"role\": \"user\", \"content\": \"From the following destinations select 3"+
-        "You will be provided the city info and weather info. Based on the desired activity select the top 3 cities."+sb.toString()+"activity:"+activity+"Provide only the destinations in a list. Nothing else. Only the name just lik it was given to you."+".\"}], \"temperature\": 0.7}");
+        "You will be provided the city info and weather info. Based on the desired activity and weather select the top 3 cities."+sb.toString()+"activity:"+activity+"desired weather"+weather+"Provide only the destinations in a list. Nothing else. Only the name just lik it was given to you."+".\"}], \"temperature\": 0.7}");
         
 
         Request request = new Request.Builder()
