@@ -13,16 +13,12 @@ public class WeatherHandler {
             System.out.println(city);
             String[] parts = city.split("[,\\s]+");
             String city_name=parts[0];
-            for (String part : parts) {
-                System.out.println(part);
-            }
+            
             
             info.add(TravelmythAPI.createInfo(city_name, type));
 
         }
-        for (CityInfo string : info) {
-            System.out.println(string.toString());
-        }
+        
     }
 
     
