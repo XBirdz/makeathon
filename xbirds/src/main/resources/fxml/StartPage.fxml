@@ -2,12 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #fff; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.xbirds.controllers.StartPageController">
    <top>
@@ -46,12 +49,29 @@
    <left>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="350.0" prefWidth="400.0" spacing="30.0">
+            <VBox prefHeight="350.0" prefWidth="400.0" spacing="10.0">
                <children>
-                  <TextField fx:id="activityTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Activity" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
-                  <TextField fx:id="weatherTextField" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Sunshines or snowflakes?" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
-                  <TextField fx:id="dateTextField" layoutX="10.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Date" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
-                  <TextField fx:id="vacationDaysTextField" layoutX="10.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Vacation Days" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
+                  <Text fx:id="stepText" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <ProgressBar fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="8.0" prefWidth="400.0" progress="0.25" style="-fx-background-color: #444; -fx-background-radius: 20;" stylesheets="@../styles.css">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ProgressBar>
+                  <VBox fx:id="inputBox" spacing="20.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <TextField fx:id="activityTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Activity" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
+                        <TextField fx:id="weatherTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Sunshines or snowflakes?" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
+                        <TextField fx:id="dateTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Date" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
+                        <TextField fx:id="vacationDaysTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Vacation Days" style="-fx-background-color: #fff; -fx-border-color: #ddd; -fx-border-radius: 10;" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </VBox>
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -68,7 +88,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #EA006D; -fx-background-radius: 10;">
+                  <Button layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#submitInfo" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #EA006D; -fx-background-radius: 10;">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                            <image>
