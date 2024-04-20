@@ -21,9 +21,8 @@ public class TravelmythAPI {
         public static String apireq(String destination, String type){
             try{
             String apiKey = "myTeam";
-            String urlString = "https://www.travelmyth.gr/api_chat_makeathon.php?destination=" + destination + "&lang=en&categories=" + type + "&apiKey=" + apiKey;
+            String urlString = "https://www.travelmyth.gr/api_chat_makeathon_multi.php?destination="+destination+"&lang=en&categories="+type+"&apiKey=myTeam";
             URL url = new URL(urlString);
-            System.out.println(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
     
@@ -37,7 +36,6 @@ public class TravelmythAPI {
                     response.append(inputLine);
                 }
                 in.close();
-    
                 return response.toString();
             } else {
                 
@@ -52,14 +50,30 @@ public class TravelmythAPI {
     public static CityInfo jsonextract(String jsonString) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(jsonString);
-            String name = jsonNode.get("name").asText();
-            String destUrl = jsonNode.get("url").asText();
-            String latitude = jsonNode.get("latitude").asText();
-            String longitude = jsonNode.get("longitude").asText();
-            List<CityInfo> citiesInfo = new ArrayList<>();
-            // Create and return a CityInfo object
-            return new CityInfo(name, destUrl, latitude, longitude);
+            JsonNode rootNode = objectMapper.readTree(jsonString);
+    
+            CityInfo cityWithMostHotels = null;
+            int maxNumberOfHotels = Integer.MIN_VALUE;
+    
+            // Iterate through each location node in the JSON
+            for (JsonNode locationNode : rootNode) {
+                String name = locationNode.get("name").asText();
+                String destUrl = locationNode.get("url").asText();
+                String latitude = locationNode.get("latitude").asText();
+                String longitude = locationNode.get("longitude").asText();
+                String numberOfHotelsStr = locationNode.get("number_of_hotels").asText();
+                String price = locationNode.get("average_price_EUR").asText();
+                int numberOfHotels = Integer.parseInt(numberOfHotelsStr);
+    
+                // Check if the current location has more hotels than the previous maximum
+                if (numberOfHotels > maxNumberOfHotels) {
+                    maxNumberOfHotels = numberOfHotels;
+                    cityWithMostHotels = new CityInfo(name, destUrl, latitude, longitude,price);
+                }
+            }
+    
+            // Return the location with the highest number of hotels
+            return cityWithMostHotels;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
