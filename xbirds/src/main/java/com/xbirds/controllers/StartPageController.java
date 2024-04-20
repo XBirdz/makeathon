@@ -21,63 +21,44 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class StartPageController { 
-        @FXML
-        private ComboBox<String> activitySelect;
 
-        @FXML
-        private TextField endDateText;
+    @FXML
+    private ComboBox<String> activitySelect;
 
-        @FXML
-        private VBox inputBox;
+    @FXML
+    private TextField endDateText;
 
-        @FXML
-        private TextField maxPriceText;
+    @FXML
+    private VBox inputBox;
+
+    @FXML
+    private TextField maxPriceText;
+
+    @FXML
+    private TextField minPriceText;
+
+    @FXML
+    private ComboBox<String> prefWeatherSelect;
+
+    @FXML
+    private ComboBox<String> accomodationSelect;
+
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private TextField startDateText;
+
+    @FXML
+    private Text stepText;
 
         
 
         @FXML
         void initialize() {
             activitySelect.setItems(FXCollections.observableArrayList("Sightseeing", "Beach", "Skiing", "Hiking", "Camping", "City Break", "Adventure", "Relaxing", "Cultural", "Shopping", "Food & Drink", "Nightlife", "Sports", "Wellness", "Family", "Romantic", "Solo", "Group", "Business", "Other"));
-
             prefWeatherSelect.setItems(FXCollections.observableArrayList("Clear sky", "Mainly clear", "Partly cloudy", "Overcast", "Fog", "Depositing rime fog", "Drizzle: Light", "Drizzle: Moderate", "Drizzle: Dense", "Freezing Drizzle: Light", "Freezing Drizzle: Dense", "Rain: Slight", "Rain: Moderate", "Rain: Heavy", "Freezing Rain: Light", "Freezing Rain: Heavy", "Snow fall: Slight", "Snow fall: Moderate", "Snow fall: Heavy", "Snow grains", "Rain showers: Slight", "Rain showers: Moderate", "Rain showers: Violent", "Snow showers: Slight", "Snow showers: Heavy", "Thunderstorm: Slight or moderate", "Thunderstorm with slight hail", "Thunderstorm with heavy hail"));
-
-            minPriceListener();
-            maxPriceListener();
-
-            startDateListener();
-            endDateListener();
-        }
-
-        @FXML
-        void startDateListener() {
-            startDateText.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue) { // Check if the field has lost focus
-                    String startDate = startDateText.getText();
-                    if (!startDate.isEmpty() && !isValidDate(startDate)) { // Check if string is NOT empty
-                        showAlert("Invalid Start Date", "Please enter a valid start date in the format dd/MM/yyyy");
-                        startDateText.clear(); // Optionally clear the field
-                    } else {
-                        // Print the start date since it's valid
-                        System.out.println("Valid Start Date: " + startDate);
-                    }
-                }
-            });
-        }
-
-        @FXML
-        void endDateListener() {
-            endDateText.focusedProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue) { // Check if the field has lost focus
-                    String endDate = endDateText.getText(); // Store endDate
-                    if (!endDate.isEmpty() && !isValidDate(endDate)) { // Check if string is NOT empty
-                        showAlert("Invalid End Date", "Please enter a valid end date in the format dd/MM/yyyy");
-                        endDateText.clear(); // Optionally clear the field
-                    } else {
-                        // Print the end date since it's valid
-                        System.out.println("Valid End Date: " + endDate);
-                    }
-                }
-            });
+            accomodationSelect.setItems(FXCollections.observableArrayList("Pool", "Spa", "Beachfront", "Dog Friendly", "Adult Only", "Honeymoon", "Skyscraper", "Infinity Pool", "Luxury", "Historic", "Parking", "Boutique-Style", "Family", "Yoga", "Ski In Ski Out", "Unusual", "Castle", "Cheap", "Overwater Bungalows", "Ski", "Vineyard", "Monastery", "Small", "Romantic", "Nightlife", "5 Star", "4 Star", "3 Star", "Haunted", "Pool Lap Lanes", "Pool Swim Up Bar", "Pool Water Slide", "Panoramic View Pool", "Rooftop Pool", "Water Park", "Wave Pool", "Lazy River", "Private Pool", "Heated Pool", "Indoor Pool", "Outdoor Pool", "Children's Pool", "Dogs Stay Free", "Dog Play Area", "Dog Sitting", "Rooms with Fireplace", "All-Inclusive Packages", "Rooms with Jacuzzi / Hot-Tub", "Health & Safety", "EV charging stations", "Gym", "Free Wi-Fi", "Business", "Treehouse", "Tennis", "Beach", "Accessible", "Casino", "Sustainability Journey", "Golf"));
         }
     
         private boolean isValidDate(String dateString) {
@@ -95,26 +76,29 @@ public class StartPageController {
         }
 
         @FXML
-        private TextField minPriceText;
-
-        @FXML
-        private ComboBox<String> prefWeatherSelect = new ComboBox<String>();
-
-
-        @FXML
-        private ProgressBar progressBar;
-
-        @FXML
-        private TextField startDateText;
-
-        @FXML
-        private Text stepText;
-
-        @FXML
         void submitInfo() {
-            minPriceListener();
-            maxPriceListener();
+            
+            if(!endDateText.getText().isEmpty() || !isValidDate(endDateText.getText())) {
+                System.out.println("error in end date");
+                return;
+            }
 
+            if(!endDateText.getText().isEmpty() || !isValidDate(endDateText.getText())) {
+                System.out.println("error in end date");
+                return;
+            }
+
+            if (minPriceText.getText().matches("\\d*\\.?\\d*") || Integer.parseInt(minPriceText.getText()) >= 0) {
+                System.out.println("error in min price");
+                return;
+            }
+
+            if (maxPriceText.getText().matches("\\d*\\.?\\d*") || Integer.parseInt(maxPriceText.getText()) >= 0) {
+                System.out.println("error in max price");
+                return;
+            }
+
+            System.out.println("successful validation");
 
         }
 
@@ -125,42 +109,6 @@ public class StartPageController {
             alert.setContentText(message);
             alert.showAndWait();
         }
-
-        // Create me a listener for the minPriceText field to get the value of the text field
-
-        @FXML
-        void minPriceListener() {
-            minPriceText.textProperty().addListener(new ChangeListener<>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    // This method will be called whenever the text changes
-
-                    // Do something with the new value
-                    System.out.println("New minimum price: " + newValue);
-
-                    // Example: Basic validation (only allow numbers)
-                    if (!newValue.matches("\\d*\\.?\\d*")) {
-                        minPriceText.setText(oldValue); // Revert to the old value
-                    }
-                }
-            });
-        }
-
-        @FXML
-        void maxPriceListener() {
-            maxPriceText.textProperty().addListener(new ChangeListener<>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    System.out.println("New maximum price: " + newValue); 
-
-                    // Example: Basic validation (only allow numbers)
-                    if (!newValue.matches("\\d*\\.?\\d*")) {
-                        maxPriceText.setText(oldValue);
-                    }
-                }
-            });
-        }
-
     
         @FXML
         void powerOff(ActionEvent event) {

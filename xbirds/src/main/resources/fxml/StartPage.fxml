@@ -66,6 +66,7 @@
                      <children>
                         <ComboBox fx:id="activitySelect" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Activity" style="-fx-background-color: #fff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #999;" visibleRowCount="8" />
                         <ComboBox fx:id="prefWeatherSelect" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Preffered Weather" style="-fx-background-color: #fff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #999;" visibleRowCount="8" />
+                        <ComboBox fx:id="accomodationSelect" layoutX="10.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" promptText="Accomodation" style="-fx-background-color: #fff; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-color: #999;" visibleRowCount="8" />
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="400.0" spacing="40.0">
                            <children>
                               <TextField fx:id="minPriceText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="180.0" promptText="Minimum Price" style="-fx-background-color: #fff; -fx-border-color: #999; -fx-border-radius: 10; -fx-background-radius: 10;" />
@@ -80,12 +81,12 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="15.0" top="10.0" />
                      </VBox.margin>
                   </VBox>
                </children>
                <padding>
-                  <Insets top="30.0" />
+                  <Insets top="5.0" />
                </padding>
             </VBox>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="300.0">
