@@ -1,7 +1,11 @@
 package com.xbirds;
 import okhttp3.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 public class GptConnector {
-    public static void gtpRequest(){
+    public static String gtpRequest(){
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -29,12 +33,32 @@ public class GptConnector {
         try {
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                System.out.println(response.body().string());
+                return response.body().string();
             } else {
-                System.out.println("Request failed: " + response.code() + " " + response.message());
+                return "Request failed: " + response.code() + " " + response.message();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }    
+
+    public static void jsonextract(String jsonString){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+
+            JsonNode choicesNode = jsonNode.get("choices");
+            if (choicesNode != null && choicesNode.isArray() && choicesNode.size() > 0) {
+                JsonNode messageNode = choicesNode.get(0).get("message");
+                if (messageNode != null) {
+                    String destinations = messageNode.get("content").asText();
+                    System.out.println("Destinations:");
+                    System.out.println(destinations);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }    
+    }
 }
