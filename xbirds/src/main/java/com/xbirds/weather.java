@@ -286,10 +286,6 @@ public class weather {
                 // Update weather code summary
                 weatherCodeSummary.put(weatherCode, weatherCodeSummary.getOrDefault(weatherCode, 0) + 1);
     
-                System.out.println("Max Temperature for Day " + (i+1) + ": " + maxTempOfDay + "°C");
-                System.out.println("Min Temperature for Day " + (i+1) + ": " + minTempOfDay + "°C");
-                System.out.println("Weather Code: " + weatherCode);
-                System.out.println();
             }
     
             // Calculate average temperatures
