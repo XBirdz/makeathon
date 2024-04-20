@@ -13,6 +13,9 @@ import java.io.BufferedReader;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class UnsplashAPIclient {
+    public static BufferedImage getphoto(String keyword){
+        return downloadPhoto(jsonextract(fetchPhotos(keyword)));
+    }
     public static String fetchPhotos(String keyword) {
        
         String baseUrl = "https://api.unsplash.com/photos/random";
@@ -79,12 +82,13 @@ public class UnsplashAPIclient {
             return null;
         }
 }
-public static String jsonextract(String jsonString){
+public static URL jsonextract(String jsonString){
     try {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(jsonString);
         String name = jsonNode.get("urls").get("regular").asText();
-        return name;
+        URL url = new URL(name);
+        return url;
 } catch (Exception e) {
     e.printStackTrace();
     return null;
