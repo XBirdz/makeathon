@@ -5,56 +5,58 @@ import java.util.stream.IntStream;
 
 public class WeatherCodes {
 
-    HashMap<Integer, String> weatherMap = new HashMap<>();
+    public static void setCodes() {
 
-    private ArrayList<String>  addDescriptions(){
-        ArrayList<String> descriptions = new ArrayList<>();
-        
-        descriptions.add("Clear sky");
-        descriptions.add("Mainly clear, partly cloudy, and overcast");
-        descriptions.add("Fog and depositing rime fog");
-        descriptions.add("Drizzle: Light, moderate, and dense intensity");
-        descriptions.add("Freezing Drizzle: Light and dense intensity");
-        descriptions.add("Rain: Slight, moderate, and heavy intensity");
-        descriptions.add("Freezing Rain: Light and heavy intensity");
-        descriptions.add("Snow fall: Slight, moderate, and heavy intensity");
-        descriptions.add("Snow grains");
-        descriptions.add("Rain showers: Slight, moderate, and violent");
-        descriptions.add("Snow showers slight and heavy");
-        descriptions.add("Thunderstorm: Slight or moderate");
-        descriptions.add("Thunderstorm with slight and heavy hail");
+        HashMap<Integer, String> weatherMap = new HashMap<>();
 
-        return descriptions;
-    }
-
-
-    private void  setValues(int[] keys , String[] descriptions){
-        for (description : descriptions)
-            IntStream.of(keys).forEach(key -> weatherMap.put(key, description));
-    }
-
-    public WeatherCodes() {
-
-        // Add your weather data
+        // Clear, Partly Cloudy Conditions
         weatherMap.put(0, "Clear sky");
-        
-        int[] keys = {1, 2, 3}; 
-        String description = new String("Mainly clear, partly cloudy, and overcast");
-        IntStream.of(keys).forEach(key -> weatherMap.put(key, description));
+        weatherMap.put(1, "Mainly clear");
+        weatherMap.put(2, "Partly cloudy");
+        weatherMap.put(3, "Overcast");
 
-
-
-        description.replace(description, "Fog and depositing rime fog");
-        keys = new int [] {45,48};
-
-
-
+        // Fog
         weatherMap.put(45, "Fog");
         weatherMap.put(48, "Depositing rime fog");
-        // ... and so on
 
-        // Example: How to print the contents of the map
-        System.out.println(weatherMap);  
-        
+        // Drizzle
+        weatherMap.put(51, "Drizzle: Light");
+        weatherMap.put(53, "Drizzle: Moderate");
+        weatherMap.put(55, "Drizzle: Dense");
+
+        // Freezing Drizzle
+        weatherMap.put(56, "Freezing Drizzle: Light");
+        weatherMap.put(57, "Freezing Drizzle: Dense");
+
+        // Rain
+        weatherMap.put(61, "Rain: Slight");
+        weatherMap.put(63, "Rain: Moderate");
+        weatherMap.put(65, "Rain: Heavy");
+
+        // Freezing Rain
+        weatherMap.put(66, "Freezing Rain: Light");
+        weatherMap.put(67, "Freezing Rain: Heavy");
+
+        // Snow
+        weatherMap.put(71, "Snow fall: Slight");
+        weatherMap.put(73, "Snow fall: Moderate");
+        weatherMap.put(75, "Snow fall: Heavy");
+
+        // Snow Grains
+        weatherMap.put(77, "Snow grains");
+
+        // Rain Showers
+        weatherMap.put(80, "Rain showers: Slight");
+        weatherMap.put(81, "Rain showers: Moderate");
+        weatherMap.put(82, "Rain showers: Violent");
+
+        // Snow Showers
+        weatherMap.put(85, "Snow showers: Slight");
+        weatherMap.put(86, "Snow showers: Heavy");
+
+        // Thunderstorm (Note: Your input had an asterisk, I'll adjust)
+        weatherMap.put(95, "Thunderstorm: Slight or moderate"); 
+        weatherMap.put(96, "Thunderstorm with slight hail"); 
+        weatherMap.put(99, "Thunderstorm with heavy hail");        
     }
 }
