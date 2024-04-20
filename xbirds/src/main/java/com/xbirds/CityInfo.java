@@ -3,14 +3,23 @@ package com.xbirds;
 public class CityInfo {
     private String name;
     private String url;
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
 
-    public CityInfo(String name, String url, double latitude, double longitude) {
+    public CityInfo(String name, String url, String latitude, String longitude) {
         this.name = name;
         this.url = url;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+    @Override
+    public String toString() {
+        return "CityInfo{" +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 
     // Getters
@@ -22,11 +31,11 @@ public class CityInfo {
         return url;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 }

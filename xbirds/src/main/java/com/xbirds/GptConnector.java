@@ -8,7 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 public class GptConnector {
-    public static String gtpRequest(){
+    public static List<String> handleUserInp(String userPrompt){
+        return jsonExtract(gtpRequest(userPrompt));
+    }
+    public static String gtpRequest(String userPrompt){
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");

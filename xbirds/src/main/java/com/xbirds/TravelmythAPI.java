@@ -10,14 +10,20 @@ import java.util.*;;
 
 
 public class TravelmythAPI {
-        private static List<CityInfo> cities;
+        private static List<CityInfo> citiesInfo = new ArrayList<>();
+        public static List<CityInfo> getInfo(){
+            return citiesInfo;
+        }
 
-
+        public static void createInfo(String destination, String type){
+            citiesInfo.add(jsonextract(apireq(destination, type)));
+        }
         public static String apireq(String destination, String type){
             try{
             String apiKey = "myTeam";
             String urlString = "https://www.travelmyth.gr/api_chat_makeathon.php?destination=" + destination + "&lang=en&categories=" + type + "&apiKey=" + apiKey;
             URL url = new URL(urlString);
+            System.out.println(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
     
@@ -53,7 +59,7 @@ public class TravelmythAPI {
             String longitude = jsonNode.get("longitude").asText();
             
             // Create and return a CityInfo object
-            return new CityInfo(name, destUrl, Double.parseDouble(latitude), Double.parseDouble(longitude));
+            return new CityInfo(name, destUrl, latitude, longitude);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
