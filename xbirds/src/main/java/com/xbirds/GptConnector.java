@@ -11,9 +11,7 @@ public class GptConnector {
     public static List<String> handleUserInp(String userPrompt){
         return jsonExtract(gtpRequest(userPrompt));
     }
-    public static List<String> selection(List<CityInfo> ci, List<WeatherInfo> wi, String a, String w){
-        return jsonExtract(city_select(ci,wi, a, w));
-    }
+   
     public static String gtpRequest(String userPrompt){
         OkHttpClient client = new OkHttpClient();
 
@@ -42,56 +40,7 @@ public class GptConnector {
             return null;
         }
     }
-    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity, String weather) {
-        OkHttpClient client = new OkHttpClient();
-    
-        MediaType mediaType = MediaType.parse("application/json");
-        StringBuilder sb = new StringBuilder();
-    
-        // Iterate over each CityInfo object and append city and weather info
-        for (int i = 0; i < ci.size(); i++) {
-            CityInfo city = ci.get(i);
-            WeatherInfo weatherInfo = wi.get(i);
-            
-           sb.append(city.getName()).append(weatherInfo.toString()).append("\n");
-        
-    
-        // Construct the JSON request body
-        String requestBody = "{" +
-    "\"model\": \"gpt-4-turbo-2024-04-09\"," +
-    "\"messages\": [" +
-        "{" +
-            "\"role\": \"user\"," +
-            "\"content\": \""  + "\"" +
-        "}" +
-    "]," +
-    "\"temperature\": 0.7" +
-"}";
-        System.err.println(requestBody);
-        RequestBody body = RequestBody.create(mediaType, requestBody);
-    
-        Request request = new Request.Builder()
-                .url("https://api.openai.com/v1/chat/completions")
-                .post(body)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer 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")
-                .build();
-    
-        try {
-            Response response = client.newCall(request).execute();
-            if (response.isSuccessful()) {
-                return response.body().string();
-            } else {
-                return "Request failed: " + response.code() + " " + response.message();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    return null;
-    }    
-
+     
     public static List<String> jsonExtract(String jsonString){
         List<String> destinations = new ArrayList<>();
         try {
