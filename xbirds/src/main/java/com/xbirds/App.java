@@ -15,7 +15,10 @@ public class App extends Application
     Stage window;
     public static void main( String[] args )
     {
+        
+        Weather.weatherdata(Weather.requestWeather(45.93326, 6.87874, "dkc"));
         launch(args);
+        
     }
 
     public void start(Stage primaryStage) throws Exception {
