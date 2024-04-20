@@ -5,13 +5,13 @@ public class GptConnector {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"Say this is a test!\"}], \"temperature\": 0.7}");
+        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-3.5-turbo-0125\", \"temperature\": 0, \"top_p\": 1, \"max_tokens\": 1200, \"n\": 1, \"messages\": [{\"role\": \"user\", \"content\": \"Hello, how are you?\"}]}");
 
         Request request = new Request.Builder()
           .url("https://api.openai.com/v1/chat/completions")
           .post(body)
           .addHeader("Content-Type", "application/json")
-          .addHeader("Authorization", "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")
+          .addHeader("Authorization", "Bearer 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")
           .build();
 
         try {
