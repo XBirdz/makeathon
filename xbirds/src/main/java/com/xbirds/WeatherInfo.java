@@ -20,8 +20,8 @@ class WeatherInfo {
         return "The Average Max Temperature for 14 days is: " + avgmaxTemp + "\n" +
                "The Average Min Temperature for 14 days is: " + avgminTemp + "\n" +
                "Total Max Temperature for 14 days is: " + totalmaxTemp + "\n" +
-               "Total Min Temperature for 14 days is: " + totalminTemp + "\n" ;
-               /* "The Weather Codes for each day are: " + weatherCode;*/
+               "Total Min Temperature for 14 days is: " + totalminTemp + "\n" +
+                "The Weather Codes for each day are: " + weatherCode;
     }
     public double getAvgMaxTemp() {
         return avgmaxTemp;
