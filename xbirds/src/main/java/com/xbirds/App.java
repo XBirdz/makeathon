@@ -22,27 +22,19 @@ public class App extends Application
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/StartPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/IntroPage.fxml"));
+        Parent root = loader.load();
         window = primaryStage;
         window.setTitle("SunSeeker");
       
-        // Get screen dimensions
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-      
-        // Set scene width and height relative to screen size
-        Scene scene = new Scene(root, screenWidth * 0.8, screenHeight * 0.8);
-        scene.setFill(null);
-      
-        // Allow resizing based on user preference
-        window.setResizable(true);
-      
-        // Optional: Set minimum and maximum sizes to prevent excessive resizing
-        window.setMinHeight(400);
-        window.setMinWidth(600);
-        window.initStyle(StageStyle.UNDECORATED);
-        window.setScene(scene);
-        window.show();
+         Scene scene = new Scene(root, 800, 500);
+         scene.setFill(null);
+       
+         window.setResizable(false);
+         window.initStyle(StageStyle.TRANSPARENT);
+ 
+         window.setScene(scene);
+         window.show();
       }
       
 

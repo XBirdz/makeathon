@@ -1,9 +1,8 @@
 package com.xbirds.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 public class StartPageController { 
         @FXML
@@ -19,9 +18,8 @@ public class StartPageController {
         private TextField weatherTextField;
     
         @FXML
-        void powerOff(MouseEvent event) {
-                System.out.println("Power Off presser");
+        void powerOff(ActionEvent event) {
+                System.out.println("quitted");
                 System.exit(0);
         }
 }
-
