@@ -241,7 +241,7 @@ public class weather {
             return "Error";
         }
     }
-    public static void weatherdata(String jsonObj){
+    public static WeatherInfo weatherdata(String jsonObj){
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -293,16 +293,14 @@ public class weather {
             double avgMinTemp = sumMinTemp / minTemperatures.size();
             
     
-            System.out.println("Total Max Temperature: " + totalMaxTemp + "°C");
-            System.out.println("Total Min Temperature: " + totalMinTemp + "°C");
-            System.out.println("Average Max Temperature: " + avgMaxTemp + "°C");
-            System.out.println("Average Min Temperature: " + avgMinTemp + "°C");
+            
     
             WeatherInfo wi = new WeatherInfo(avgMaxTemp , avgMinTemp, totalMaxTemp, totalMinTemp, WeatherClassification.classify(weatherCodeSummary));
-            
+            return wi;
     
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     } 
     

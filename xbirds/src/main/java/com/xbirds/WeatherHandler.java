@@ -4,10 +4,10 @@ import java.util.List;
 public class WeatherHandler {
     private  List<String> cities;
     private  List<CityInfo> info = new ArrayList<>();
-    private  String[] weathers;
-    private  String type="ski";
-    public  void init(String input, String type){
-        this.type = type;
+    private  List<WeatherInfo> weathers = new ArrayList();
+    private  String type;
+    public  void init(String input, String type1){
+        this.type = type1;
         cities = GptConnector.handleUserInp(input);
         for (String city : cities) {
             System.out.println(city);
@@ -19,8 +19,7 @@ public class WeatherHandler {
 
         }
         for (CityInfo cityInfo : info) {
-            System.out.println(cityInfo.getName());
-            weather.weatherdata(weather.requestWeather(Double.parseDouble(cityInfo.getLatitude()), Double.parseDouble(cityInfo.getLongitude()), " "));
+            weathers.add(weather.weatherdata(weather.requestWeather(Double.parseDouble(cityInfo.getLatitude()), Double.parseDouble(cityInfo.getLongitude()), " ")));
         } 
         
     }
