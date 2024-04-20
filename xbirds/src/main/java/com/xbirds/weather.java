@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.List;
 
 
-public class Weather {
+public class weather {
 
 
     public static class WeatherData {
