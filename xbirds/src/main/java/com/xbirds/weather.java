@@ -12,34 +12,199 @@ import java.util.List;
 
 
 public class Weather {
-    class WeatherData {
+    public static class WeatherData {
+        @JsonProperty("latitude")
+        private double latitude;
+
+        @JsonProperty("longitude")
+        private double longitude;
+
+        @JsonProperty("generationtime_ms")
+        private double generationTimeMs;
+
+        @JsonProperty("utc_offset_seconds")
+        private int utcOffsetSeconds;
+
+        @JsonProperty("timezone")
+        private String timezone;
+
+        @JsonProperty("timezone_abbreviation")
+        private String timezoneAbbreviation;
+
+        @JsonProperty("elevation")
+        private double elevation;
+
+        @JsonProperty("daily_units")
+        private DailyUnits dailyUnits;
+
         @JsonProperty("daily")
         private DailyData dailyData;
-    
+
+        // Getters and setters
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(double longitude) {
+            this.longitude = longitude;
+        }
+
+        public double getGenerationTimeMs() {
+            return generationTimeMs;
+        }
+
+        public void setGenerationTimeMs(double generationTimeMs) {
+            this.generationTimeMs = generationTimeMs;
+        }
+
+        public int getUtcOffsetSeconds() {
+            return utcOffsetSeconds;
+        }
+
+        public void setUtcOffsetSeconds(int utcOffsetSeconds) {
+            this.utcOffsetSeconds = utcOffsetSeconds;
+        }
+
+        public String getTimezone() {
+            return timezone;
+        }
+
+        public void setTimezone(String timezone) {
+            this.timezone = timezone;
+        }
+
+        public String getTimezoneAbbreviation() {
+            return timezoneAbbreviation;
+        }
+
+        public void setTimezoneAbbreviation(String timezoneAbbreviation) {
+            this.timezoneAbbreviation = timezoneAbbreviation;
+        }
+
+        public double getElevation() {
+            return elevation;
+        }
+
+        public void setElevation(double elevation) {
+            this.elevation = elevation;
+        }
+
+        public DailyUnits getDailyUnits() {
+            return dailyUnits;
+        }
+
+        public void setDailyUnits(DailyUnits dailyUnits) {
+            this.dailyUnits = dailyUnits;
+        }
+
         public DailyData getDailyData() {
             return dailyData;
         }
+
+        public void setDailyData(DailyData dailyData) {
+            this.dailyData = dailyData;
+        }
     }
-    
-    class DailyData {
+
+    public static class DailyUnits {
+        @JsonProperty("time")
+        private String time;
+
+        @JsonProperty("weather_code")
+        private String weatherCode;
+
+        @JsonProperty("temperature_2m_max")
+        private String maxTemperature;
+
+        @JsonProperty("temperature_2m_min")
+        private String minTemperature;
+
+        // Getters and setters
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public String getWeatherCode() {
+            return weatherCode;
+        }
+
+        public void setWeatherCode(String weatherCode) {
+            this.weatherCode = weatherCode;
+        }
+
+        public String getMaxTemperature() {
+            return maxTemperature;
+        }
+
+        public void setMaxTemperature(String maxTemperature) {
+            this.maxTemperature = maxTemperature;
+        }
+
+        public String getMinTemperature() {
+            return minTemperature;
+        }
+
+        public void setMinTemperature(String minTemperature) {
+            this.minTemperature = minTemperature;
+        }
+    }
+
+    public static class DailyData {
+        @JsonProperty("time")
+        private List<String> time;
+
+        @JsonProperty("weather_code")
+        private List<Integer> weatherCodes;
+
         @JsonProperty("temperature_2m_max")
         private List<Double> maxTemperatures;
-    
+
         @JsonProperty("temperature_2m_min")
         private List<Double> minTemperatures;
 
-        @JsonProperty("weather_codes")
-        private List<Integer> weatherCodes;
-    
+        // Getters and setters
+        public List<String> getTime() {
+            return time;
+        }
+
+        public void setTime(List<String> time) {
+            this.time = time;
+        }
+
+        public List<Integer> getWeatherCodes() {
+            return weatherCodes;
+        }
+
+        public void setWeatherCodes(List<Integer> weatherCodes) {
+            this.weatherCodes = weatherCodes;
+        }
+
         public List<Double> getMaxTemperatures() {
             return maxTemperatures;
         }
-    
+
+        public void setMaxTemperatures(List<Double> maxTemperatures) {
+            this.maxTemperatures = maxTemperatures;
+        }
+
         public List<Double> getMinTemperatures() {
             return minTemperatures;
         }
-        public List<Integer> getWeatherCodes() {
-            return weatherCodes;
+
+        public void setMinTemperatures(List<Double> minTemperatures) {
+            this.minTemperatures = minTemperatures;
         }
     }
     public static String requestWeather(double latitude, double longitude, String destination ){
