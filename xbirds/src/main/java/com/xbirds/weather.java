@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class weather {
-    public static String requestWeather(double latitude, double longitude, String destination ){
+public class Weather {
+    public static String requestWeather(double latitude, double longitude, String destination){
         try{
         String urlString = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=14";
 
