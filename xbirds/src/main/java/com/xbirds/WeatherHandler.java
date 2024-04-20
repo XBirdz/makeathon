@@ -7,13 +7,13 @@ public class WeatherHandler {
     private  List<CityInfo> info = new ArrayList<>();
     private  List<CityInfo> top3 = new ArrayList<>();
     private  List<WeatherInfo> weathers = new ArrayList();
-    public  void init(String activity, String weatherInp, String distance, String location, String budget, String company, String season){
-        cities = GptConnector.handleUserInp(InputManager.promptCreator(activity, weatherInp, distance, location, budget, company, season));
+    public  void init(List<String> features,String type, String weatherInp, String distance, String location, String budget, String company, String season){
+        cities = GptConnector.handleUserInp(InputManager.promptCreator(type, weatherInp, distance, location, budget, company, season));
         for (String city : cities) {
             System.out.println(city);
             
             
-            info.add(TravelmythAPI.createInfo(city, activity));
+            info.add(TravelmythAPI.createInfo(city, features));
 
         }
         

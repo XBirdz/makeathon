@@ -15,13 +15,19 @@ public class TravelmythAPI {
             return citiesInfo;
         }
 
-        public static CityInfo createInfo(String destination, String type){
+        public static CityInfo createInfo(String destination, List<String> type){
             return jsonextract(apireq(destination, type));
         }
-        public static String apireq(String destination, String type){
+        public static String apireq(String destination, List <String> type){
             try{
+            StringBuilder sb = new StringBuilder();
+            for (String string : type) {
+                sb.append(string).append(",");
+            }
+            String types = sb.toString();
             String apiKey = "myTeam";
-            String urlString = "https://www.travelmyth.gr/api_chat_makeathon_multi.php?destination="+destination+"&lang=en&categories="+type+"&apiKey=myTeam";
+            String urlString = "https://www.travelmyth.gr/api_chat_makeathon_multi.php?destination="+destination+"&lang=en&categories="+types+"&apiKey=myTeam";
+            System.out.println(urlString);
             URL url = new URL(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -33,7 +39,7 @@ public class TravelmythAPI {
                 StringBuilder response = new StringBuilder();
     
                 while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                    response.append(inputLine);                                                                                                                                                     
                 }
                 in.close();
                 return response.toString();
