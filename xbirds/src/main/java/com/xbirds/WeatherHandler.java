@@ -20,7 +20,7 @@ public class WeatherHandler {
         for (CityInfo cityInfo : info) {
             weathers.add(weather.weatherdata(weather.requestWeather(Double.parseDouble(cityInfo.getLatitude()), Double.parseDouble(cityInfo.getLongitude()), " ")));
         }
-        top3String = GptConnector.selection(info, weathers, activity);
+        top3String = GptConnector.selection(info, weathers, activity, weatherInp);
         for(int i =0;i<top3String.size();i++){
             for(int j =0;j<info.size();j++){
                 if(top3String.get(i)==info.get(j).getName()){

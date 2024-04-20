@@ -15,5 +15,13 @@ class WeatherInfo {
         totalminTemp =m2;
         weatherCode=c;
     }
+    @Override
+    public String toString() {
+        return "Average Max Temp: " + avgmaxTemp + "\n" +
+               "Average Min Temp: " + avgminTemp + "\n" +
+               "Total Max Temp: " + totalmaxTemp + "\n" +
+               "Total Min Temp: " + totalminTemp + "\n" +
+               "Weather Code: " + weatherCode;
+    }
     
 }
