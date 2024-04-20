@@ -1,7 +1,5 @@
 package com.xbirds;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.IntStream;
 
 public class WeatherCodes {
 
