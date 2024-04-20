@@ -11,23 +11,48 @@ public class GptConnector {
     public static List<String> handleUserInp(String userPrompt){
         return jsonExtract(gtpRequest(userPrompt));
     }
+    public static List<String> selection(List<CityInfo> ci, List<WeatherInfo> wi, String a){
+        return jsonExtract(city_select(ci,wi, a));
+    }
     public static String gtpRequest(String userPrompt){
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
-        String bodyString = "{" +
-        "\"model\": \"gpt-4-turbo-2024-04-09\", " +
-        "\"temperature\": 0, " +
-        "\"top_p\": 1, " +
-        "\"max_tokens\": 15000, " +
-        "\"n\": 1, " +
-        "\"messages\": [" +
-        "{\"role\": \"travel-assistant\", \"content\": \"You will provide travel destinations based on the requirements and desires of the user. You will provide a list " +
-        "with only the destination names. Nothing else. Approximately 10 destinations.This is the user desires: Hi i want a romantic beach destintion for a city break. I live in athens.\"}" +
-        "],";
-        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-3.5-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"You will provide travel destinations based on the requirements and desires of the user. You will provide a list " +
-        "with only the destination names. Nothing else. Approximately 10 destinations.This is the user desires: "+userPrompt+".\"}], \"temperature\": 0.7}");
+       
+        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-4-turbo-2024-04-09\", \"messages\": [{\"role\": \"user\", \"content\": \"You will provide travel destinations based on the requirements and desires of the user. You will provide a list " +
+        "with only the destination names. Nothing else. Approximately 10 destinations. Only English characters. dont return the country only destination.This is the user desires: "+userPrompt+".\"}], \"temperature\": 0.7}");
         //RequestBody body = RequestBody.create(mediaType, bodyString);
+
+        Request request = new Request.Builder()
+          .url("https://api.openai.com/v1/chat/completions")
+          .post(body)
+          .addHeader("Content-Type", "application/json")
+          .addHeader("Authorization", "Bearer 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")
+          .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                return response.body().string();
+            } else {
+                return "Request failed: " + response.code() + " " + response.message();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static String city_select(List<CityInfo> ci, List<WeatherInfo> wi, String activity){
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("application/json");
+        StringBuilder sb =  new StringBuilder();
+        for (int i = 0;i<ci.size();i++) {
+            sb. append("City info: "+ci.get(i).toString()+" Weather info: "+wi.toString());
+        }
+        RequestBody body = RequestBody.create(mediaType, "{\"model\": \"gpt-4-turbo-2024-04-09\", \"messages\": [{\"role\": \"user\", \"content\": \"From the following destinations select 3"+
+        "You will be provided the city info and weather info. Based on the desired activity select the top 3 cities."+sb.toString()+"activity:"+activity+"Provide only the destinations in a list. Nothing else. Only the name just lik it was given to you."+".\"}], \"temperature\": 0.7}");
+        
 
         Request request = new Request.Builder()
           .url("https://api.openai.com/v1/chat/completions")
@@ -75,4 +100,5 @@ public class GptConnector {
             return null;
         }
     }
+
 }
