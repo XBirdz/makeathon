@@ -16,7 +16,7 @@ public class App extends Application
     public static void main( String[] args )
     {
         
-        Weather.weatherdata(Weather.requestWeather(45.93326, 6.87874, "dkc"));
+       Tasos_tests.test();
         launch(args);
         
     }
