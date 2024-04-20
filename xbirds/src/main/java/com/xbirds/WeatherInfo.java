@@ -17,11 +17,39 @@ class WeatherInfo {
     }
     @Override
     public String toString() {
-        return "Average Max Temp: " + avgmaxTemp + "\n" +
-               "Average Min Temp: " + avgminTemp + "\n" +
-               "Total Max Temp: " + totalmaxTemp + "\n" +
-               "Total Min Temp: " + totalminTemp + "\n" +
-               "Weather Code: " + weatherCode;
+        return "The Average Max Temperature for 14 days is: " + avgmaxTemp + "\n" +
+               "The Average Min Temperature for 14 days is: " + avgminTemp + "\n" +
+               "Total Max Temperature for 14 days is: " + totalmaxTemp + "\n" +
+               "Total Min Temperature for 14 days is: " + totalminTemp + "\n" ;
+               /* "The Weather Codes for each day are: " + weatherCode;*/
     }
-    
+    public double getAvgMaxTemp() {
+        return avgmaxTemp;
+    }
+
+   
+
+    public double getAvgMinTemp() {
+        return avgminTemp;
+    }
+
+  
+
+    public double getTotalMaxTemp() {
+        return totalmaxTemp;
+    }
+
+   
+
+    public double getTotalMinTemp() {
+        return totalminTemp;
+    }
+
+   
+
+    public int getWeatherCode() {
+        return weatherCode;
+    }
+
+  
 }

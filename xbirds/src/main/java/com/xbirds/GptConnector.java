@@ -50,13 +50,24 @@ public class GptConnector {
     
         // Iterate over each CityInfo object and append city and weather info
         for (int i = 0; i < ci.size(); i++) {
-            sb.append("City info: ").append(ci.get(i)).append(" Weather info: ").append(wi.get(i)).append("\n");
-        }
+            CityInfo city = ci.get(i);
+            WeatherInfo weatherInfo = wi.get(i);
+            
+           sb.append(city.getName()).append(weatherInfo.toString()).append("\n");
+        
     
         // Construct the JSON request body
-        String requestBody = String.format("{\"model\": \"gpt-4-turbo\", \"messages\": [{\"role\": \"user\", \"content\": \"From the following destinations select 3. "
-                + "You will be provided the city info and weather info. Based on the desired activity and weather, select the top 3 cities.\n%s\nActivity: %s\nDesired weather: %s\nProvide only the destinations in a list. Nothing else. Only the name just like it was given to you.\"}], \"temperature\": 0.7}", sb.toString(), activity, weather);
-    
+        String requestBody = "{" +
+    "\"model\": \"gpt-4-turbo-2024-04-09\"," +
+    "\"messages\": [" +
+        "{" +
+            "\"role\": \"user\"," +
+            "\"content\": \""  + "\"" +
+        "}" +
+    "]," +
+    "\"temperature\": 0.7" +
+"}";
+        System.err.println(requestBody);
         RequestBody body = RequestBody.create(mediaType, requestBody);
     
         Request request = new Request.Builder()
@@ -77,6 +88,8 @@ public class GptConnector {
             e.printStackTrace();
             return null;
         }
+    }
+    return null;
     }    
 
     public static List<String> jsonExtract(String jsonString){
