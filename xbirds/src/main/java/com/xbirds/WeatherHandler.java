@@ -18,6 +18,9 @@ public class WeatherHandler {
             info.add(TravelmythAPI.createInfo(city_name, type));
 
         }
+        for (CityInfo cityInfo : info) {
+            weather.weatherdata(weather.requestWeather(Double.parseDouble(cityInfo.getLatitude()), Double.parseDouble(cityInfo.getLongitude()), " "));
+        } 
         
     }
 

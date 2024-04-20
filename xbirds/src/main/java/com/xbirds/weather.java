@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class weather {
@@ -243,48 +245,68 @@ public class weather {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            
+        
             WeatherData weatherData = objectMapper.readValue(jsonObj, WeatherData.class);
-
+    
             
             List<Integer> weatherCodes = weatherData.getDailyData().getWeatherCodes();
             List<Double> maxTemperatures = weatherData.getDailyData().getMaxTemperatures();
             List<Double> minTemperatures = weatherData.getDailyData().getMinTemperatures();
-
-            double avgMaxTemp=0;
-            double avgMinTemp=0;
-            double maxTemp = Double.MIN_VALUE;
-            double minTemp = Double.MAX_VALUE;
+    
+            double totalMaxTemp = Double.MIN_VALUE;
+            double totalMinTemp = Double.MAX_VALUE;
             int maxTempIndex = -1;
             int minTempIndex = -1;
-
+    
+            double sumMaxTemp = 0;
+            double sumMinTemp = 0;
+    
+            // HashMap to store occurrences of each weather code
+            Map<Integer, Integer> weatherCodeSummary = new HashMap<>();
+    
             for (int i = 0; i < maxTemperatures.size(); i++) {
                 double maxTempOfDay = maxTemperatures.get(i);
                 double minTempOfDay = minTemperatures.get(i);
                 int weatherCode = weatherCodes.get(i);
-
-                if (maxTempOfDay > maxTemp) {
-                    maxTemp = maxTempOfDay;
+    
+                // Update total max and min temperatures
+                if (maxTempOfDay > totalMaxTemp) {
+                    totalMaxTemp = maxTempOfDay;
                     maxTempIndex = i;
-                    avgMaxTemp+=maxTempOfDay;
                 }
-                if (minTempOfDay < minTemp) {
-                    minTemp = minTempOfDay;
+                if (minTempOfDay < totalMinTemp) {
+                    totalMinTemp = minTempOfDay;
                     minTempIndex = i;
-                    avgMinTemp+=minTempOfDay;
                 }
-
-                
-            
-                System.out.println("Max Temperature: " + maxTempOfDay + "°C");
-                System.out.println("Min Temperature: " + minTempOfDay + "°C");
+    
+                // Update sum of temperatures for later calculation of averages
+                sumMaxTemp += maxTempOfDay;
+                sumMinTemp += minTempOfDay;
+    
+                // Update weather code summary
+                weatherCodeSummary.put(weatherCode, weatherCodeSummary.getOrDefault(weatherCode, 0) + 1);
+    
+                System.out.println("Max Temperature for Day " + (i+1) + ": " + maxTempOfDay + "°C");
+                System.out.println("Min Temperature for Day " + (i+1) + ": " + minTempOfDay + "°C");
                 System.out.println("Weather Code: " + weatherCode);
                 System.out.println();
             }
-
-           
-            
-
+    
+            // Calculate average temperatures
+            double avgMaxTemp = sumMaxTemp / maxTemperatures.size();
+            double avgMinTemp = sumMinTemp / minTemperatures.size();
+    
+            System.out.println("Total Max Temperature: " + totalMaxTemp + "°C");
+            System.out.println("Total Min Temperature: " + totalMinTemp + "°C");
+            System.out.println("Average Max Temperature: " + avgMaxTemp + "°C");
+            System.out.println("Average Min Temperature: " + avgMinTemp + "°C");
+    
+            // Print weather code summary
+            System.out.println("Weather Code Summary:");
+            for (Map.Entry<Integer, Integer> entry : weatherCodeSummary.entrySet()) {
+                System.out.println("Weather Code " + entry.getKey() + ": " + entry.getValue() + " occurrences");
+            }
+    
         } catch (IOException e) {
             e.printStackTrace();
         }
