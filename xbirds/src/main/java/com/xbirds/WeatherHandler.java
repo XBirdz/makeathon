@@ -5,8 +5,8 @@ public class WeatherHandler {
     private  List<String> cities;
     private  List<CityInfo> info = new ArrayList<>();
     private  List<WeatherInfo> weathers = new ArrayList();
-    public  void init(String activity, String weatherInp){
-        cities = GptConnector.handleUserInp(InputManager.promptCreator(activity, weatherInp));
+    public  void init(String activity, String weatherInp, String distance, String location, String budget, String company){
+        cities = GptConnector.handleUserInp(InputManager.promptCreator(activity, weatherInp, distance, location, budget, company));
         for (String city : cities) {
             System.out.println(city);
             String[] parts = city.split("[,\\s]+");
