@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.List;
 public class GptConnector {
     public static String gtpRequest(){
         OkHttpClient client = new OkHttpClient();
@@ -43,7 +46,8 @@ public class GptConnector {
         }
     }    
 
-    public static void jsonextract(String jsonString){
+    public static List<String> jsonExtract(String jsonString){
+        List<String> destinations = new ArrayList<>();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(jsonString);
@@ -52,13 +56,20 @@ public class GptConnector {
             if (choicesNode != null && choicesNode.isArray() && choicesNode.size() > 0) {
                 JsonNode messageNode = choicesNode.get(0).get("message");
                 if (messageNode != null) {
-                    String destinations = messageNode.get("content").asText();
-                    System.out.println("Destinations:");
-                    System.out.println(destinations);
+                    String destinationsString = messageNode.get("content").asText();
+                    // Split the destinations string by newline character
+                    String[] destinationArray = destinationsString.split("\\n");
+                    for (String destination : destinationArray) {
+                        // Remove the leading number and space from each destination
+                        destination = destination.replaceFirst("^\\d+\\.\\s*", "");
+                        destinations.add(destination);
+                    }
                 }
             }
+            return destinations;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 }
