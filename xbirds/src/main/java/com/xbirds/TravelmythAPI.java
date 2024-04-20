@@ -6,14 +6,24 @@ import java.net.URL;
 import java.io.BufferedReader;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.*;;
+
 
 public class TravelmythAPI {
+        private static List<CityInfo> citiesInfo = new ArrayList<>();
+        public static List<CityInfo> getInfo(){
+            return citiesInfo;
+        }
 
+        public static CityInfo createInfo(String destination, String type){
+            return jsonextract(apireq(destination, type));
+        }
         public static String apireq(String destination, String type){
             try{
             String apiKey = "myTeam";
             String urlString = "https://www.travelmyth.gr/api_chat_makeathon.php?destination=" + destination + "&lang=en&categories=" + type + "&apiKey=" + apiKey;
             URL url = new URL(urlString);
+            System.out.println(urlString);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
     
@@ -39,7 +49,7 @@ public class TravelmythAPI {
         }
         
     }
-    public static void jsonextract(String jsonString){
+    public static CityInfo jsonextract(String jsonString) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(jsonString);
@@ -47,12 +57,14 @@ public class TravelmythAPI {
             String destUrl = jsonNode.get("url").asText();
             String latitude = jsonNode.get("latitude").asText();
             String longitude = jsonNode.get("longitude").asText();
-    } catch (Exception e) {
-        e.printStackTrace();
+            List<CityInfo> citiesInfo = new ArrayList<>();
+            // Create and return a CityInfo object
+            return new CityInfo(name, destUrl, latitude, longitude);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
-    public static void main(String [] args ){
-        System.out.println(apireq("Athens","ski"));
-    }
-}
+
 

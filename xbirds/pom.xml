@@ -68,6 +68,12 @@
             <artifactId>controlsfx</artifactId>
             <version>11.2.0</version>
         </dependency>
+        <dependency>
+          <groupId>com.squareup.okhttp3</groupId>
+          <artifactId>okhttp</artifactId>
+          <version>5.0.0-alpha.14</version>
+      </dependency>
+      
 
   </dependencies>
 
@@ -91,7 +97,7 @@
                 </execution>
             </executions>
             <configuration>
-                <mainClass>com.xbirds.Main</mainClass>
+                <mainClass>com.xbirds.App</mainClass>
             </configuration>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
@@ -134,7 +140,7 @@
             <artifactId>javafx-maven-plugin</artifactId>
             <version>0.0.8</version>
             <configuration>
-                <mainClass>gr.aueb.dmst.onepercent.programming.graphics.RunMain</mainClass>
+                <mainClass>com.xbirds.App</mainClass>
             </configuration>
         </plugin>
       </plugins>
