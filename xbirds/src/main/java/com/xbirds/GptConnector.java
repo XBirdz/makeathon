@@ -25,7 +25,7 @@ public class GptConnector {
           .url("https://api.openai.com/v1/chat/completions")
           .post(body)
           .addHeader("Content-Type", "application/json")
-          .addHeader("Authorization", "Bearer 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")
+          .addHeader("Authorization", "Bearer sk-proj-kiZn5aYO0WdLoCmQSjB1T3BlbkFJKPrq5FxsWdBzgJ39XoUE")
           .build();
 
         try {
@@ -58,6 +58,8 @@ public class GptConnector {
                     for (String destination : destinationArray) {
                         // Remove the leading number and space from each destination
                         destination = destination.replaceFirst("^\\d+\\.\\s*", "");
+                        
+                        destination = destination.replaceFirst("\\s+", "");
                         destinations.add(destination);
                     }
                 }
