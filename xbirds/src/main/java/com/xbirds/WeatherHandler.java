@@ -36,7 +36,7 @@ public class WeatherHandler {
 
         for (Integer i : res2) {
             res.add(new Pair<>(info.get(i), weathers.get(i)));
-            System.out.println(i);
+            System.out.println(WeatherCodes.getDescr(weathers.get(i).getWeatherCode()));
         }        
         for (CityInfo c : top3) {
             System.out.println(c.toString());
