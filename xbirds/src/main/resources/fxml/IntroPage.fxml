@@ -29,7 +29,7 @@
             </Button>
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#power" style="-fx-background-color: #fff;">
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/general/power-off-button.png" />
                      </image>

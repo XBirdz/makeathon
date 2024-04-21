@@ -21,12 +21,12 @@ public class App extends Application
     }
 
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/IntroPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartPage.fxml"));
         Parent root = loader.load();
         window = primaryStage;
         window.setTitle("SunSeeker");
       
-         Scene scene = new Scene(root, 800, 500);
+         Scene scene = new Scene(root, 1000, 650);
          scene.setFill(null);
        
          window.setResizable(false);
