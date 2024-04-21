@@ -32,7 +32,7 @@ Multistep Form:
     git clone https://github.com/XBirdz/makeathon.git
 
 2. Open the project in your preferred Java development environment (e.g., IntelliJ IDEA, Eclipse).
-3. Run the Main.java file to launch the application.
+3. Run the App.java file to launch the application.
 
     
 ## Usage 🌍
