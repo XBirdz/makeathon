@@ -161,6 +161,17 @@ public class StartPageController {
                 List<Pair<CityInfo, WeatherInfo>> res  = new ArrayList<>();
                 res  = FrontLayer.giveUserData(selectedAccomodationOptions, activityString, weatherString, distancesString, location, budget, company, season, startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ResultsPage.fxml")); 
+                List<String> urls = new ArrayList<>();
+                List<String> names = new ArrayList<>();
+                List<String> maxtemp = new ArrayList<>();
+                List<String> mintemp = new ArrayList<>();
+                for ( Pair<CityInfo, WeatherInfo> pair : res) {
+                    urls.add(pair.getKey().getUrl());
+                    names.add(pair.getKey().getName());
+                    maxtemp.add(String.valueOf(pair.getValue().getAvgMaxTemp()));
+                    mintemp.add(String.valueOf(pair.getValue().getAvgMinTemp()));
+
+                }
                 Parent root;
                 try {
                         root = loader.load();
