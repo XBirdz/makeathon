@@ -33,7 +33,7 @@ public class App extends Application
          window.initStyle(StageStyle.TRANSPARENT);
  
          window.setScene(scene);
-         
+
          window.show();
       }
       
