@@ -3,6 +3,7 @@ package com.xbirds.controllers;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,23 +40,31 @@ public class IntroPageController {
         };
 
         // Schedule the task to run every 5 seconds (5000 milliseconds)
-        timer.scheduleAtFixedRate(task, 0, 5000);
+        timer.scheduleAtFixedRate(task, 0, 50000);
     }
 
     private void updateImage() {
-        BufferedImage image = UnsplashAPIclient.getphoto("nature");
+        File file = new File("path/to/your/image.jpg");
+        BufferedImage image = new BufferedImage(100, 100, 1);
+        try {
+            image = ImageIO.read(file);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //BufferedImage image = UnsplashAPIclient.getphoto("nature");
         byte[] imageBytes = convertToByteArray(image);
 
         // Create JavaFX Image from byte array
         Image fxImage = new Image(new ByteArrayInputStream(imageBytes));
         showcaseImage.setImage(fxImage);
-        showcaseImage.setFitHeight(400);
-        showcaseImage.setFitWidth(760);
+        showcaseImage.setFitHeight(500);
+        showcaseImage.setFitWidth(960);
         showcaseImage.setPreserveRatio(false);
 
         Rectangle clip = new Rectangle();
-        clip.setWidth(showcaseImage.getFitWidth());
-        clip.setHeight(showcaseImage.getFitHeight());
+        clip.setWidth(960);
+        clip.setHeight(500);
         clip.setArcWidth(20); // the arc width to change the roundness of the corners
         clip.setArcHeight(20); // Adjust the arc height to change the roundness of the corners
 
@@ -84,7 +93,7 @@ public class IntroPageController {
             Parent root;
             try {
                     root = loader.load();
-                    Scene startPageScene = new Scene(root, 800, 500);
+                    Scene startPageScene = new Scene(root, 1000, 650);
                     startPageScene.setFill(null);
                     App.window.setScene(startPageScene);
             } catch (IOException e) {
