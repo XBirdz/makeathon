@@ -27,22 +27,19 @@ public class Embeddings {
         }
         return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
     }
-    public JSONArray jsonExtract(String json){
-        
+    public List<JSONArray> extractEmbeddings(String json) {
         JSONObject response = new JSONObject(json);
         JSONArray dataArray = response.getJSONArray("data");
 
-        // Extract embeddings and save them
-        JSONArray embeddings = new JSONArray();
+        List<JSONArray> embeddingsList = new ArrayList<>();
         for (int i = 0; i < dataArray.length(); i++) {
             JSONObject item = dataArray.getJSONObject(i);
             if (item.getString("object").equals("embedding")) {
-                embeddings.put(item.getJSONArray("embedding"));
+                embeddingsList.add(item.getJSONArray("embedding"));
             }
         }
 
-        return embeddings;
-        
+        return embeddingsList;
     }
     public String encode(String target){
         try {
@@ -85,5 +82,32 @@ public class Embeddings {
             e.printStackTrace();
             return null;
         }
+}
+public List<Integer> findClosestPhraseIndices(String target, List<String> phrases) {
+    List<Integer> closestIndices = new ArrayList<>();
+    String targetEncoding = encode(target);
+    List<JSONArray> phraseEmbeddings = new ArrayList<>();
+
+    // Encode all phrases and store their embeddings
+    for (String phrase : phrases) {
+        String encoding = encode(phrase);
+        JSONArray embedding = extractEmbeddings(encoding).get(0);
+        phraseEmbeddings.add(embedding);
+    }
+
+    // Calculate cosine similarity between target and all phrases
+    Map<Integer, Double> similarityMap = new HashMap<>();
+    for (int i = 0; i < phrases.size(); i++) {
+        double similarity = cosineSimilarity(extractEmbeddings(targetEncoding).get(0), phraseEmbeddings.get(i));
+        similarityMap.put(i, similarity);
+    }
+
+    // Sort indices by similarity and select the top 3
+    similarityMap.entrySet().stream()
+            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            .limit(3)
+            .forEach(entry -> closestIndices.add(entry.getKey()));
+
+    return closestIndices;
 }
 }
