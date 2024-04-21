@@ -1,7 +1,7 @@
 package com.xbirds;
 
 
-class WeatherInfo {
+public class WeatherInfo {
     private double avgmaxTemp;
     private double avgminTemp;
     private double totalmaxTemp;

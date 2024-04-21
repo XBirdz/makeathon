@@ -54,7 +54,7 @@ public class Embeddings {
             
       
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Authorization", "Bearer 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");
+            connection.setRequestProperty("Authorization", "Bearer sk-proj-kiZn5aYO0WdLoCmQSjB1T3BlbkFJKPrq5FxsWdBzgJ39XoUE");
             connection.setDoOutput(true);
             
             

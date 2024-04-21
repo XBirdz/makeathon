@@ -1,15 +1,23 @@
 package com.xbirds.controllers;
 
+import java.util.List;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import com.xbirds.App;
+import com.xbirds.CityInfo;
 import com.xbirds.FrontLayer;
+import com.xbirds.WeatherInfo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
@@ -17,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Pair;
 
 public class StartPageController { 
 
@@ -149,8 +158,19 @@ public class StartPageController {
                 } else if(startDate[1].equals("09") || startDate[1].equals("10") || startDate[1].equals("11")) {
                     season = "fall";
                 }
-                
-                FrontLayer.giveUserData(selectedAccomodationOptions, activityString, weatherString, distancesString, location, budget, company, season, startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]);
+                List<Pair<CityInfo, WeatherInfo>> res  = new ArrayList<>();
+                res  = FrontLayer.giveUserData(selectedAccomodationOptions, activityString, weatherString, distancesString, location, budget, company, season, startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ResultsPage.fxml")); 
+                Parent root;
+                try {
+                        root = loader.load();
+                        Scene startPageScene = new Scene(root, 800, 500);
+                        startPageScene.setFill(null);
+                        App.window.setScene(startPageScene);
+                } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
             }
         }
 
