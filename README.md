@@ -39,10 +39,10 @@ Multistep Form:
 
 1. Upon launching, the app displays background images fetched from Unsplash.
 2. Follow the multistep form to input your preferences:
-* Select activities.
-* Choose weather preferences.
-* Specify accommodation type.
-* Provide location, dates, travel distance, budget, and company type.
-* Click "Submit" to generate top destination suggestions.
+   * Select activities.
+   * Choose weather preferences.
+   * Specify accommodation type.
+   * Provide location, dates, travel distance, budget, and company type.
+   * Click "Submit" to generate top destination suggestions.
 3. The app will display the top 3 destinations along with relevant information and weather validation for the next 10 days.
 
