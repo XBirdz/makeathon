@@ -40,4 +40,7 @@ public class CityInfo {
     public String getLongitude() {
         return longitude;
     }
+    public void setUrl (String checkinDay, String checkinMonth, String checkinYear, String checkoutDay, String checkoutMonth, String checkoutYear){
+        this.url+="&checkin_day="+checkinDay+"&checkin_month="+checkinMonth+"&checkin_year="+checkinYear+"&checkout_day="+checkoutDay+"&checkout_month="+checkoutMonth+"&checkout_year="+checkoutYear;
+    }
 }

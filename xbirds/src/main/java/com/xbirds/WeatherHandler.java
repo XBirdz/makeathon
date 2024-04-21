@@ -13,7 +13,7 @@ public class WeatherHandler {
     private  List<CityInfo> top3 = new ArrayList<>();
     private  List<WeatherInfo> weathers = new ArrayList();
     private List<String> weatherDescr = new ArrayList<>();
-    public  List<Pair<CityInfo,WeatherInfo>> init(List<String> features,String type, String weatherInp, String distance, String location, String budget, String company, String season){
+    public  List<Pair<CityInfo,WeatherInfo>> init(List<String> features,String type, String weatherInp, String distance, String location, String budget, String company, String season, String checkinDay, String checkinMonth, String checkinYear, String checkoutDay, String checkoutMonth, String checkoutYear){
         cities = GptConnector.handleUserInp(InputManager.promptCreator(type, weatherInp, distance, location, budget, company, season));
         for (String city : cities) {
             System.out.println(city);
@@ -36,11 +36,12 @@ public class WeatherHandler {
 
         for (Integer i : res2) {
             res.add(new Pair<>(info.get(i), weathers.get(i)));
-            System.out.println(WeatherCodes.getDescr(weathers.get(i).getWeatherCode()));
+            System.out.println(cities.get(i)+" "+WeatherCodes.getDescr(weathers.get(i).getWeatherCode()));
         }        
-        for (CityInfo c : top3) {
-            System.out.println(c.toString());
+        for (Pair<CityInfo,WeatherInfo> pair : res) {
+            pair.getKey().setUrl(checkinDay, checkinMonth, checkinYear, checkoutDay, checkoutMonth, checkoutYear);
         }
+     
         return res;
     }
 

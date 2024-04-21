@@ -23,7 +23,7 @@ public class Embeddings {
             norm2 += Math.pow(emb2.getDouble(i), 2);
         }
         if (norm1 == 0 || norm2 == 0) {
-            return 0.0; // To handle zero vectors
+            return 0.0;
         }
         return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
     }
@@ -43,27 +43,26 @@ public class Embeddings {
     }
     public String encode(String target){
         try {
-            // Set the API endpoint URL
+           
             URL url = new URL("https://api.openai.com/v1/embeddings");
 
-            // Create a HttpURLConnection object
+          
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             
-            // Set the request method
+        
             connection.setRequestMethod("POST");
             
-            // Set request headers
+      
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Authorization", "Bearer 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");
             connection.setDoOutput(true);
             
-            // Set the request body
+            
             String requestBody = "{\"input\": \""+target+"\", \"model\": \"text-embedding-3-small\"}";
             OutputStream os = connection.getOutputStream();
             os.write(requestBody.getBytes());
             os.flush();
-            
-            // Get the response
+           
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuilder response = new StringBuilder();
@@ -72,10 +71,7 @@ public class Embeddings {
             }
             in.close();
             
-            // Print the response
            
-            
-            // Close the connection
             connection.disconnect();
             return response.toString();
         } catch (Exception e) {
@@ -88,21 +84,21 @@ public List<Integer> findClosestPhraseIndices(String target, List<String> phrase
     String targetEncoding = encode(target);
     List<JSONArray> phraseEmbeddings = new ArrayList<>();
 
-    // Encode all phrases and store their embeddings
+   
     for (String phrase : phrases) {
         String encoding = encode(phrase);
         JSONArray embedding = extractEmbeddings(encoding).get(0);
         phraseEmbeddings.add(embedding);
     }
 
-    // Calculate cosine similarity between target and all phrases
+  
     Map<Integer, Double> similarityMap = new HashMap<>();
     for (int i = 0; i < phrases.size(); i++) {
         double similarity = cosineSimilarity(extractEmbeddings(targetEncoding).get(0), phraseEmbeddings.get(i));
         similarityMap.put(i, similarity);
     }
 
-    // Sort indices by similarity and select the top 3
+   
     similarityMap.entrySet().stream()
             .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
             .limit(3)
