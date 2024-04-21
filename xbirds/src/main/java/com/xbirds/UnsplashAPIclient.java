@@ -14,7 +14,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 public class UnsplashAPIclient {
     public static BufferedImage getphoto(String keyword){
-        return downloadPhoto(jsonextract(fetchPhotos(keyword)));
+        //return downloadPhoto(jsonextract(fetchPhotos(keyword)));
+        return new BufferedImage(3, 3, 0);
     }
     public static String fetchPhotos(String keyword) {
        
