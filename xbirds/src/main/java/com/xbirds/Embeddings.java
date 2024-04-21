@@ -13,7 +13,20 @@ public class Embeddings {
     public List<JSONArray> embeddings = new ArrayList<>();
     public JSONArray targetemb = new JSONArray();
 
-    
+    private double cosineSimilarity(JSONArray emb1, JSONArray emb2) {
+        double dotProduct = 0.0;
+        double norm1 = 0.0;
+        double norm2 = 0.0;
+        for (int i = 0; i < emb1.length(); i++) {
+            dotProduct += emb1.getDouble(i) * emb2.getDouble(i);
+            norm1 += Math.pow(emb1.getDouble(i), 2);
+            norm2 += Math.pow(emb2.getDouble(i), 2);
+        }
+        if (norm1 == 0 || norm2 == 0) {
+            return 0.0; // To handle zero vectors
+        }
+        return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
+    }
     public JSONArray jsonExtract(String json){
         
         JSONObject response = new JSONObject(json);
