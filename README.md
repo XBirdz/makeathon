@@ -35,7 +35,18 @@ Multistep Form:
     git clone https://github.com/your-username/sunseeker.git
 
 2. Open the project in your preferred Java development environment (e.g., IntelliJ IDEA, Eclipse).
-3. Run the Main.java file to launch the application.
+3. Ensure Maven Installation:
+    Check if Maven is installed by running
+     
+      ```bash
+         mvn -v
+      ```
+     If Maven is installed, it will display version information. If not, you'll need to install Maven following the [installation instructions](https://maven.apache.org/install.html).
+4. Run the Project: Using Maven
+
+      ```bash
+         mvn javafx:run
+      ```
 
     
 ## Usage 🌍
@@ -55,7 +66,7 @@ Multistep Form:
 Clone the project
 
 ```bash
-  git clone https://github.com/XBirdz/makeathon.git
+  git clone https://link-to-project
 ```
 
 Go to the project directory
