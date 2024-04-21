@@ -55,7 +55,7 @@ Multistep Form:
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/XBirdz/makeathon.git
 ```
 
 Go to the project directory
