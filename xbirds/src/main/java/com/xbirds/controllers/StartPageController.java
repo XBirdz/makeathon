@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import com.xbirds.FrontLayer;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -42,10 +44,14 @@ public class StartPageController {
     String location;
     String[] startDate;
     String[] endDate;
+    String budget;
+    String company;
 
     TextField locationField;
     TextField startDateField;
     TextField endDateField;
+    TextField budgetField;
+    TextField companyField;
 
     int step = 1;
 
@@ -114,7 +120,37 @@ public class StartPageController {
                 location = locationField.getText();
                 startDate = startDateField.getText().split("/");
                 endDate = endDateField.getText().split("/");
-                for(String s : startDate) System.out.println(s);
+
+                String activityString = "";
+                for(int i = 0; i < selectedActivities.size(); i++) {
+                    activityString += selectedActivities.get(i);
+                    if(i < selectedActivities.size() - 1) activityString += ", ";
+                }
+
+                String weatherString = "";
+                for(int i = 0; i < selectWeatherPref.size(); i++) {
+                    weatherString += selectWeatherPref.get(i);
+                    if(i < selectWeatherPref.size() - 1) weatherString += ", ";
+                }
+
+                String distancesString = "";
+                for(int i = 0; i < selectedDistances.size(); i++) {
+                    distancesString += selectedDistances.get(i);
+                    if(i < selectedDistances.size() - 1) distancesString += ", ";
+                }
+
+                String season = "";
+                if(startDate[1].equals("01") || startDate[1].equals("02") || startDate[1].equals("12")) {
+                    season = "winter";
+                } else if(startDate[1].equals("03") || startDate[1].equals("04") || startDate[1].equals("05")) {
+                    season = "spring";
+                } else if(startDate[1].equals("06") || startDate[1].equals("07") || startDate[1].equals("08")) {
+                    season = "summer";
+                } else if(startDate[1].equals("09") || startDate[1].equals("10") || startDate[1].equals("11")) {
+                    season = "fall";
+                }
+                
+                FrontLayer.giveUserData(selectedAccomodationOptions, activityString, weatherString, distancesString, location, budget, company, season, startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]);
             }
         }
 
@@ -231,8 +267,26 @@ public class StartPageController {
                 VBox distanceBox = new VBox(text, hbox);
                 distanceBox.setSpacing(15);
 
+                budgetField = new TextField();
+                budgetField.setMaxHeight(40);
+                budgetField.setMinHeight(40);
+                budgetField.setMaxWidth(280);
+                budgetField.setMinWidth(280);
+                budgetField.setPromptText("Max Budget");
+                budgetField.setStyle("-fx-background-color: white; -fx-border-color: #999; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-                VBox box = new VBox(locationField, startDateField, endDateField, distanceBox);
+                companyField = new TextField();
+                companyField.setMaxHeight(40);
+                companyField.setMinHeight(40);
+                companyField.setMaxWidth(280);
+                companyField.setMinWidth(280);
+                companyField.setPromptText("Company");
+                companyField.setStyle("-fx-background-color: white; -fx-border-color: #999; -fx-border-radius: 10; -fx-background-radius: 10;");
+                HBox lastBox = new HBox(budgetField, companyField);
+                lastBox.setSpacing(40);
+
+
+                VBox box = new VBox(locationField, startDateField, endDateField, distanceBox, lastBox);
                 box.setSpacing(20);
                 inputBox.getChildren().add(box);  
                 
