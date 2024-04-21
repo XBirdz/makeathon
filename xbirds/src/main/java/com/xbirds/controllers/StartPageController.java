@@ -45,7 +45,10 @@ public class StartPageController {
     private String[] activities = {"Sightseeing", "Beach", "Skiing", "Hiking", "Camping", "City Break", "Adventure", "Relaxing", "Cultural", "Shopping", "Food & Drink", "Nightlife", "Sports", "Wellness", "Family", "Romantic", "Solo", "Group", "Business"};
     private String[] prefWeatherOptions = {"Clear sky", "Mainly clear", "Partly cloudy", "Overcast", "Fog", "Depositing rime fog", "Drizzle: Light", "Drizzle: Moderate", "Drizzle: Dense", "Freezing Drizzle: Light", "Freezing Drizzle: Dense", "Rain: Slight", "Rain: Moderate", "Rain: Heavy", "Freezing Rain: Light", "Freezing Rain: Heavy", "Snow fall: Slight", "Snow fall: Moderate", "Snow fall: Heavy", "Snow grains", "Rain showers: Slight", "Rain showers: Moderate", "Rain showers: Violent", "Snow showers: Slight", "Snow showers: Heavy", "Thunderstorm: Slight or moderate", "Thunderstorm with slight hail", "Thunderstorm with heavy hail"};
     private String[] accomodationOptions = {"Pool", "Spa", "Beachfront", "Dog Friendly", "Adult Only", "Honeymoon", "Skyscraper", "Infinity Pool", "Luxury", "Historic", "Parking", "Boutique-Style", "Family", "Yoga", "Ski In Ski Out", "Unusual", "Castle", "Cheap", "Overwater Bungalows", "Ski", "Vineyard", "Monastery", "Small", "Romantic", "Nightlife", "5 Star", "4 Star", "3 Star", "Haunted", "Pool Lap Lanes", "Pool Swim Up Bar", "Pool Water Slide", "Panoramic View Pool", "Rooftop Pool", "Water Park", "Wave Pool", "Lazy River", "Private Pool", "Heated Pool", "Indoor Pool", "Outdoor Pool", "Children's Pool", "Dogs Stay Free", "Dog Play Area", "Dog Sitting", "Rooms with Fireplace", "All-Inclusive Packages", "Rooms with Jacuzzi / Hot-Tub", "Health & Safety", "EV charging stations", "Gym", "Free Wi-Fi", "Business", "Treehouse", "Tennis", "Beach", "Accessible", "Casino", "Sustainability Journey", "Golf"};    
-
+    List<String> urls = new ArrayList<>();
+    List<String> names = new ArrayList<>();
+    List<String> maxtemp = new ArrayList<>();
+    List<String> mintemp = new ArrayList<>();
     private ArrayList<String> selectedActivities;
     private ArrayList<String> selectWeatherPref;
     private ArrayList<String> selectedAccomodationOptions;
@@ -161,22 +164,28 @@ public class StartPageController {
                 List<Pair<CityInfo, WeatherInfo>> res  = new ArrayList<>();
                 res  = FrontLayer.giveUserData(selectedAccomodationOptions, activityString, weatherString, distancesString, location, budget, company, season, startDate[0], startDate[1], startDate[2], endDate[0], endDate[1], endDate[2]);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ResultsPage.fxml")); 
-                List<String> urls = new ArrayList<>();
-                List<String> names = new ArrayList<>();
-                List<String> maxtemp = new ArrayList<>();
-                List<String> mintemp = new ArrayList<>();
+                
                 for ( Pair<CityInfo, WeatherInfo> pair : res) {
                     urls.add(pair.getKey().getUrl());
                     names.add(pair.getKey().getName());
                     maxtemp.add(String.valueOf(pair.getValue().getAvgMaxTemp()));
                     mintemp.add(String.valueOf(pair.getValue().getAvgMinTemp()));
 
+
                 }
+
                 Parent root;
                 try {
+                    ResultsPageController.urls= urls;
+                    ResultsPageController.names=names;
+                    ResultsPageController.maxtemp=maxtemp;
+                    ResultsPageController.mintemp=mintemp;
                         root = loader.load();
                         Scene startPageScene = new Scene(root, 800, 500);
                         startPageScene.setFill(null);
+
+                        
+
                         App.window.setScene(startPageScene);
                 } catch (IOException e) {
                         // TODO Auto-generated catch block

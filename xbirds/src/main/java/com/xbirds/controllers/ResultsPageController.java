@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResultsPageController {
 
@@ -55,11 +57,29 @@ public class ResultsPageController {
     @FXML
     private ImageView image3;
 
+    public static List<String> urls = new ArrayList<>();
+    public static List<String> names = new ArrayList<>();
+    public static List<String> maxtemp = new ArrayList<>();
+    public static List<String> mintemp = new ArrayList<>();
+
+  @FXML
+  void initialize(){
+    destination3.setText(names.get(2));
+    destination1.setText(names.get(0));
+    destination2.setText(names.get(1));
+    temperatureSuggestion1.setText(String.format("%.1f°C-%.1f°C", Double.parseDouble(mintemp.get(0)), Double.parseDouble(maxtemp.get(0))));
+    temperatureSuggestion2.setText(String.format("%.1f°C-%.1f°C", Double.parseDouble(mintemp.get(1)), Double.parseDouble(maxtemp.get(1))));
+    temperatureSuggestion3.setText(String.format("%.1f°C-%.1f°C", Double.parseDouble(mintemp.get(2)), Double.parseDouble(maxtemp.get(2))));
+  }
+
+
     @FXML
     void openSuggestion1(ActionEvent event) {
+     
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+
                 try {
-                  Desktop.getDesktop().browse(new URI("www.google.com"));
+                  Desktop.getDesktop().browse(new URI(urls.get(0)));
                 } catch (Exception e) {
                   e.printStackTrace();
                   // Handle potential exceptions (e.g., invalid URL)
@@ -73,9 +93,10 @@ public class ResultsPageController {
 
     @FXML
     void openSuggestion2(ActionEvent event) {
+      
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 try {
-                  Desktop.getDesktop().browse(new URI("www.google.com"));
+                  Desktop.getDesktop().browse(new URI(urls.get(1)));
                 } catch (Exception e) {
                   e.printStackTrace();
                   // Handle potential exceptions (e.g., invalid URL)
@@ -89,9 +110,10 @@ public class ResultsPageController {
 
     @FXML
     void openSuggestion3(ActionEvent event) {
+      
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 try {
-                  Desktop.getDesktop().browse(new URI("www.google.com"));
+                  Desktop.getDesktop().browse(new URI(urls.get(2)));
                 } catch (Exception e) {
                   e.printStackTrace();
                   // Handle potential exceptions (e.g., invalid URL)
