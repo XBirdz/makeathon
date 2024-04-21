@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Embeddings {
     public List<JSONArray> embeddings = new ArrayList<>();
     public JSONArray targetemb = new JSONArray();
-
+    private static String API_KEY="";
     private double cosineSimilarity(JSONArray emb1, JSONArray emb2) {
         double dotProduct = 0.0;
         double norm1 = 0.0;
@@ -54,7 +54,7 @@ public class Embeddings {
             
       
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Authorization", "Bearer sk-proj-kiZn5aYO0WdLoCmQSjB1T3BlbkFJKPrq5FxsWdBzgJ39XoUE");
+            connection.setRequestProperty("Authorization", "Bearer "+API_KEY);
             connection.setDoOutput(true);
             
             

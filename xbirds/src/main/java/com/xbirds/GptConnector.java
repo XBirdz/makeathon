@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 public class GptConnector {
+    private static String API_KEY= "";
     public static List<String> handleUserInp(String userPrompt){
         return jsonExtract(gtpRequest(userPrompt));
     }
@@ -25,7 +26,7 @@ public class GptConnector {
           .url("https://api.openai.com/v1/chat/completions")
           .post(body)
           .addHeader("Content-Type", "application/json")
-          .addHeader("Authorization", "Bearer sk-proj-kiZn5aYO0WdLoCmQSjB1T3BlbkFJKPrq5FxsWdBzgJ39XoUE")
+          .addHeader("Authorization", "Bearer "+API_KEY)
           .build();
 
         try {
