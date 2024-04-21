@@ -5,8 +5,12 @@ public class Tasos_tests {
         WeatherHandler w = new WeatherHandler();
         List<String> features = new ArrayList<>();
         features.add("pool");
-        features.add("beachfront");
-        //w.init( features,"ski", "snowy","far","Athens","cheap","couple","winter");
+       
+        w.init( features,"ski", "snowy,no rain","far","Athens","cheap","couple","winter");
        //Embeddings.encode("null", features);
+       //Embeddings embeddings = new Embeddings();
+       //List<Integer> closestIndices = embeddings.findClosestPhraseIndices("water",features);
+        //System.out.println("Indices of closest phrases to \"" + "sand" + "\": " + closestIndices);
     }
-}
+    }
+
